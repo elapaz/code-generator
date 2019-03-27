@@ -20,9 +20,12 @@ def load_data(file):
               help='Name of the template to apply', default='actions.js')
 @click.option('-v', '--verbose', count=True, help='Increment verbosity')
 def code_generator_app(data, template, verbose):
-
     templateLoader = jinja2.FileSystemLoader(searchpath="templates/")
     templateEnv = jinja2.Environment(loader=templateLoader)
+    if not os.path.isfile(data) or not os.path.isfile(template):
+        logger.error('Data or template invalid')
+        return
+
     template_instance = templateEnv.get_template(template)
 
     data_content = load_data(data)

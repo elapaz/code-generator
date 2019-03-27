@@ -108,3 +108,6 @@ venv.bak/
 templates/
 data/
 output/
+
+!data/config.yml
+!templates/actions.js
