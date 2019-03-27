@@ -3,6 +3,7 @@ import yaml
 import click
 import jinja2
 import logging
+import os
 
 logger = logging.getLogger('default')
 
@@ -26,6 +27,9 @@ def code_generator_app(data, template, verbose):
 
     data_content = load_data(data)
     rendered_content = template_instance.render(**data_content)
+
+    if not os.path.exists('output'):
+        os.makedirs('output')
 
     with open('output/{0}'.format(template), 'w') as wf:
         wf.write(rendered_content)
